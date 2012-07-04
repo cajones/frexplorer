@@ -1,15 +1,30 @@
-package com.frexplorer {
+package com.frexplorer
+{
 	import flash.display.*;
-	import flash.text.*;
-	
-	public class Main extends Sprite {
-		private var greeting:TextField = new TextField();
-
-		public function Main() {
-			greeting.text = "Hello World";
-			greeting.x = 100;
-			greeting.y = 100;
-			addChild(greeting);
+	import com.frexplorer.view.HelloWorldView;
+	import com.mvc.View;
+		
+	public class Main extends Sprite
+	{
+		private var views:Array = [];
+		
+		public function Main()
+		{
+			addView(new HelloWorldView());
+		}
+		
+		private function addView(view:View):void
+		{
+			views.push(view);
+			addChild(view);
+		}
+		
+		private function start():void
+		{
+			for (var i:int = 0; i < views.length; i++)
+			{
+				views[i].render();
+			}
 		}
 	}
 }
