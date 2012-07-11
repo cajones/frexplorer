@@ -1,30 +1,17 @@
 package com.frexplorer
 {
 	import flash.display.*;
-	import com.frexplorer.view.HelloWorldView;
-	import com.mvc.View;
+	import com.mvc.*;
+	import com.frexplorer.view.*;
 		
 	public class Main extends Sprite
 	{
-		private var views:Array = [];
+		private var _application:Application;
 		
 		public function Main()
 		{
-			addView(new HelloWorldView());
-		}
-		
-		private function addView(view:View):void
-		{
-			views.push(view);
-			addChild(view);
-		}
-		
-		private function start():void
-		{
-			for (var i:int = 0; i < views.length; i++)
-			{
-				views[i].render();
-			}
+			_application = new FractalExplorerApp(this);
+			_application.start();
 		}
 	}
 }
