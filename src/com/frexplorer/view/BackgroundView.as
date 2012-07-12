@@ -23,7 +23,7 @@ package com.frexplorer.view
 				width: stage.stageWidth,
 				height: stage.stageHeight,
 				transparent: false,
-				backgroundColour: 0x152c40
+				backgroundColour: 0x000000
 			});
 			
 			addChild(new Bitmap(new BitmapData(context.width, context.height, context.transparent, context.backgroundColour)));

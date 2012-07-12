@@ -6,7 +6,7 @@ package com.frexplorer
 		
 	public class Main extends Sprite
 	{
-		private var _application:Application;
+		private var _application:Application; //How do I destroy this?
 		
 		public function Main()
 		{

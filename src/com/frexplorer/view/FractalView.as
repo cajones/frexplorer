@@ -2,10 +2,13 @@ package com.frexplorer.view
 {
 	import com.frexplorer.model.IFractal;
 	import com.mvc.View;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	import flash.display.Bitmap
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
+	import flash.utils.getTimer;
 	
 	public class FractalView extends View 
 	{
@@ -28,24 +31,31 @@ package com.frexplorer.view
 			this.y = context.y;
 			
 			if (!context.fractal is IFractal) return;
-			var m:Matrix = context.fractal.evaluate(1,2,this.width, this.height);
 			
-			var bitmap:BitmapData = new BitmapData(context.width, context.height, false, Colour.black);
 			
-			for (var y:uint = 0; y < bitmap.height; y++) 
-			{ 
-				for (var x:uint = 0; x < bitmap.width; x++)
-				{
-					if (x % 4 == 0) {
-						bitmap.setPixel(x, y, Colour.red);
-					}
-					if (y % 4 == 0) {
-						bitmap.setPixel(x, y, Colour.green);
-					}
-				}
-			} 
-		 
-			addChild(new Bitmap(bitmap)); 
+			var bitmap:BitmapData = new BitmapData(context.width, context.height, false, context.backgroundColour);
+			
+			var startingTime:Number = getTimer();
+			var data:Array = context.fractal.evaluate(context.width, context.height, function(x:int, y:int, pixelData:Number):void {
+				bitmap.setPixel(x, y, pixelData);
+			});
+			var endingTime:Number = getTimer();
+			context.renderTimeInMilliseconds = endingTime - startingTime;
+			
+			addChild(new Bitmap(bitmap));
+			
+			renderStatistics();
+		}
+		private function renderPixel(x:int, y:int, pixelData:Number):void 
+		{
+			
+		}
+		private function renderStatistics():void 
+		{
+			var stats:TextField = new TextField();
+			stats.text = context.renderTimeInMilliseconds + "ms";
+			stats.setTextFormat(new TextFormat(null, 11, 0xffffff));
+			addChild(stats);
 		}
 	}
 }

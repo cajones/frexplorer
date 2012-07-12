@@ -8,16 +8,24 @@ package com.mvc
 	{
 		private var _surface:Sprite;
 		private var _views:Array = [];
+		private var _controllers:Array = [];
 		
 		public function Application(surface:Sprite) 
 		{
 			_surface = surface;
 		}
 		
-		public function addView(view:View):void
+		public function addView(view:View):View
 		{
 			_views.push(view);
 			_surface.addChild(view);
+			return view;
+		}
+		
+		public function addController(controller:Object):Object
+		{
+			_controllers.push(controller);
+			return controller;
 		}
 		
 		public function start():void
