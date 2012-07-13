@@ -20,7 +20,9 @@ package com.frexplorer.view
 			x: 50,
 			y: 50,
 			height: 16,
-			width: 90
+			width: 75,
+			type: "input",
+			border: true
 		};
 		public function SpecifyValuesView(context:Object) 
 		{
@@ -37,6 +39,8 @@ package com.frexplorer.view
 			this.y = context.y;
 			this.z = 1;
 			
+			
+			
 			xmin = createInputField( {
 				prototype: textFieldPrototype,
 				text: context.values.xmin
@@ -51,7 +55,7 @@ package com.frexplorer.view
 			});
 			xmax.addEventListener(Event.CHANGE, handleChange);
 			addChild(xmax);
-			
+
 			ymin = createInputField( {
 				prototype: textFieldPrototype,
 				text: context.values.ymin,
@@ -68,6 +72,42 @@ package com.frexplorer.view
 			});
 			ymax.addEventListener(Event.CHANGE, handleChange);
 			addChild(ymax);
+			
+			
+			addChild(createInputField( {
+				prototype: textFieldPrototype,
+				text: "x",
+				x: textFieldPrototype.x - 20,
+				type: "dynamic",
+				border: false
+			}));
+			addChild(createInputField( {
+				prototype: textFieldPrototype,
+				text: "..",
+				x: textFieldPrototype.x + textFieldPrototype.width + 5,
+				height: 20,
+				type: "dynamic",
+				border: false
+			}));
+			addChild(createInputField( {
+				prototype: textFieldPrototype,
+				text: "y",
+				x: textFieldPrototype.x - 20,
+				y: textFieldPrototype.x + textFieldPrototype.height * 2,
+				height: 20,
+				type: "dynamic",
+				border: false
+			}));
+			addChild(createInputField( {
+				prototype: textFieldPrototype,
+				text: "..",
+				x: textFieldPrototype.x + textFieldPrototype.width + 5,
+				y: textFieldPrototype.x + textFieldPrototype.height * 2,
+				height: 20,
+				type: "dynamic",
+				border: false
+			}));
+
 		}
 		
 		private function handleChange(e:Event):void 
@@ -85,14 +125,14 @@ package com.frexplorer.view
 			defaults(options, options.prototype);
 			
 			var field:TextField = new TextField();
-			field.border = true;
+			field.border = options.border;
 			field.backgroundColor = context.backgroundColour;
-			field.width = 90;
+			field.width = options.width;
 			field.height = options.height;
 			field.x = options.x;
 			field.y = options.y;
-			field.type = "input";
-			field.multiline = true;
+			field.type = options.type;
+			field.multiline = false;
 			field.setTextFormat(new TextFormat(null, 12, context.textColour));
 			field.text = options.text;
 			return field;

@@ -50,7 +50,7 @@ package com.frexplorer.model
 			var y:Number = 0;
 			
 			var iteration:int = 0;
-			var maxIteration:int = 36;
+			var maxIteration:int = 1000;
 			
 			while ( x*x + y*y < 2*2 && iteration < maxIteration ) 
 			{
